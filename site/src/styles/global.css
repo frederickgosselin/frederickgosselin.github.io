@@ -1,0 +1,124 @@
+/* Palette taken from the Polytechnique Montréal brand logo files. */
+:root {
+  --ink: #1d1d1b;
+  --ink-soft: #55564f;
+  --paper: #ffffff;
+  --paper-soft: #f6f6f4;
+  --rule: #e2e2dd;
+
+  --cyan: #00b4ec;
+  --green: #04a83c;
+  --orange: #e84c10;
+  --red: #e40814;
+
+  /* darkened cyan so links reach AA contrast (about 5:1) on white */
+  --link: #00709e;
+  --link-hover: #1d1d1b;
+
+  --measure: 44rem;
+  --wide: 62rem;
+  --font: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --ink: #f1f1ee;
+    --ink-soft: #b7b8b0;
+    --paper: #161614;
+    --paper-soft: #1f1f1c;
+    --rule: #34342f;
+    --link: #4cc7f2;
+    --link-hover: #ffffff;
+  }
+  :root:not([data-theme='light']) img.on-light { background: #fff; border-radius: 4px; padding: 0.25rem; }
+}
+
+* { box-sizing: border-box; }
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.6;
+  font-size: 1.0625rem;
+}
+img { max-width: 100%; height: auto; }
+a { color: var(--link); text-underline-offset: 0.15em; }
+a:hover { color: var(--link-hover); }
+:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }
+
+.skip { position: absolute; left: -999px; top: 0; background: var(--ink); color: var(--paper); padding: 0.5rem 1rem; z-index: 10; }
+.skip:focus { left: 0; }
+
+/* four-colour brand bar */
+.bar { display: flex; height: 4px; }
+.bar i { flex: 1; }
+.bar i:nth-child(1) { background: var(--red); }
+.bar i:nth-child(2) { background: var(--orange); }
+.bar i:nth-child(3) { background: var(--green); }
+.bar i:nth-child(4) { background: var(--cyan); }
+.bar.short { width: 11rem; height: 5px; margin: 1.25rem 0; }
+
+/* header */
+.site-header { border-bottom: 1px solid var(--rule); }
+.site-header .inner {
+  max-width: var(--wide); margin: 0 auto; padding: 0.9rem 1rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 2rem; justify-content: space-between;
+}
+.brand img { display: block; height: 2.6rem; width: auto; }
+.nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; align-items: center; font-size: 0.97rem; }
+.nav a { color: var(--ink); text-decoration: none; padding: 0.25rem 0; border-bottom: 2px solid transparent; }
+.nav a:hover { border-bottom-color: var(--cyan); }
+.nav a[aria-current='page'] { border-bottom-color: var(--ink); font-weight: 600; }
+.nav .lang { margin-left: 0.5rem; padding: 0.15rem 0.7rem; border: 1px solid var(--ink-soft); border-radius: 999px; font-size: 0.9rem; }
+.nav .lang:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+main { max-width: var(--measure); margin: 0 auto; padding: 2.25rem 1rem 4rem; }
+main.wide { max-width: var(--wide); }
+
+h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
+h1 { font-size: 2.1rem; margin: 0 0 0.25rem; }
+h2 { font-size: 1.45rem; margin: 2.2rem 0 0.6rem; }
+h3 { font-size: 1.15rem; margin: 1.6rem 0 0.4rem; }
+.prose p, .prose li { max-width: 70ch; }
+.prose iframe { max-width: 100%; aspect-ratio: 16 / 9; height: auto; width: 100%; border: 0; }
+.prose img { border-radius: 3px; }
+.prose ol, .prose ul { padding-left: 1.4rem; }
+.prose li { margin: 0.35rem 0; }
+.prose table { border-collapse: collapse; width: 100%; }
+.prose td, .prose th { border: 1px solid var(--rule); padding: 0.4rem 0.6rem; vertical-align: top; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.hero h1 { font-size: 2.6rem; }
+.hero .role { color: var(--ink-soft); margin: 0.25rem 0 0; font-size: 1.15rem; }
+.hero .lab { margin: 0.5rem 0 0; }
+.hero .lab-logo img { display: block; width: 9.5rem; height: auto; }
+@media (max-width: 40rem) {
+  .hero { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.1rem; }
+  .hero .lab-logo img { width: 7rem; }
+}
+
+/* news list */
+.news-list { list-style: none; padding: 0; margin: 0; }
+.news-list li { padding: 1rem 0; border-top: 1px solid var(--rule); }
+.news-list li:first-child { border-top: 0; }
+.news-list time { color: var(--ink-soft); font-size: 0.9rem; }
+.news-list a.title { display: block; font-size: 1.15rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.news-list a.title:hover { color: var(--link); text-decoration: underline; }
+.meta { color: var(--ink-soft); font-size: 0.92rem; }
+.tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.6rem 0 0; }
+.tags li { background: var(--paper-soft); border: 1px solid var(--rule); border-radius: 999px; padding: 0.05rem 0.7rem; font-size: 0.85rem; margin: 0; }
+
+/* footer: symbol bottom right + small LM2 logo, as in the lab slide template */
+.site-footer { border-top: 1px solid var(--rule); background: var(--paper-soft); }
+.site-footer .inner {
+  max-width: var(--wide); margin: 0 auto; padding: 1.25rem 1rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  font-size: 0.9rem; color: var(--ink-soft);
+}
+.site-footer .logos { display: flex; align-items: center; gap: 1rem; }
+.site-footer .logos img { display: block; height: 2.4rem; width: auto; }
+.site-footer .logos .symbol { height: 2.8rem; }

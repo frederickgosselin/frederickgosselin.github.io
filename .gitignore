@@ -1,0 +1,19 @@
+# --- WordPress backup and migration inputs: database dump, internals, never public ---
+/backup/
+/migration/
+*.zip
+*installer-backup.php
+wp-config.php
+
+# --- brand source files (web-sized copies live in site/public/logos) ---
+/logos/
+
+# --- build output and dependencies ---
+node_modules/
+site/dist/
+site/.astro/
+
+# --- local tool state ---
+.claude/settings.local.json
+Thumbs.db
+.DS_Store

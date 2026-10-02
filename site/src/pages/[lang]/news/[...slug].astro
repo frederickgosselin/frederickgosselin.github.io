@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import { T, fmtDate, type Lang } from '../../../i18n';
+
+export async function getStaticPaths() {
+  const all = await getCollection('news');
+  return all.map((entry) => {
+    const [lang, ...rest] = entry.id.split('/');
+    return { params: { lang, slug: rest.join('/') }, props: { entry } };
+  });
+}
+const lang = Astro.params.lang as Lang;
+const t = T[lang];
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const fmt = { format: (d: Date) => fmtDate(lang, d) };
+const other = lang === 'en' ? 'fr' : 'en';
+const altUrl = entry.data.translation ? `/${other}/news/${entry.data.translation}/` : `/${other}/news/`;
+---
+
+<Base lang={lang} title={entry.data.title} current="news" altUrl={altUrl}>
+  <article>
+    <p class="meta"><a href={`/${lang}/news/`}>← {t.news}</a> · <time datetime={entry.data.date.toISOString().slice(0, 10)}>{fmt.format(entry.data.date)}</time></p>
+    <h1>{entry.data.title}</h1>
+    <div class="bar short"><i></i><i></i><i></i><i></i></div>
+    <div class="prose"><Content /></div>
+    {entry.data.tags.length > 0 && (
+      <ul class="tags" aria-label={t.tags}>{entry.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+    )}
+  </article>
+</Base>

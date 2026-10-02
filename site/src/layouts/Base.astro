@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import { PAGES, T, other, pageUrl, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** current page slug (for the menu highlight), or 'news' / 'home' */
+  current?: string;
+  /** URL of the same content in the other language, if it exists */
+  altUrl?: string;
+  wide?: boolean;
+}
+const { lang, title, description, current = '', altUrl, wide = false } = Astro.props;
+const t = T[lang];
+const fullTitle = title ? `${title} | ${t.siteName}` : `${t.siteName} | ${t.role}`;
+const switchTo = altUrl ?? `/${other(lang)}/`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description ?? t.role} />
+    <link rel="icon" type="image/png" href="/logos/polymtl-symbol.png" />
+    <link rel="alternate" hreflang={other(lang)} href={switchTo} />
+  </head>
+  <body>
+    <a class="skip" href="#content">{t.skip}</a>
+    <header class="site-header">
+      <div class="bar"><i></i><i></i><i></i><i></i></div>
+      <div class="inner">
+        <a class="brand" href={`/${lang}/`} aria-label={`${t.siteName}, home`}>
+          <img class="on-light" src="/logos/polymtl-alt.png" alt="Polytechnique Montréal" width="640" height="176" />
+        </a>
+        <nav class="nav" aria-label="Main">
+          {PAGES.map((p) => (
+            <a href={pageUrl(lang, p[lang])} aria-current={current === p[lang] ? 'page' : undefined}>{t.menu[p[lang]]}</a>
+          ))}
+          <a href={`/${lang}/news/`} aria-current={current === 'news' ? 'page' : undefined}>{t.news}</a>
+          <a class="lang" href={switchTo} hreflang={other(lang)} lang={other(lang)}>{t.otherLang}</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="content" class={wide ? 'wide' : ''}>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="inner">
+        <span>© {new Date().getFullYear()} Frédérick P. Gosselin · {t.lab}</span>
+        <span class="logos">
+          <img class="on-light" src="/logos/lm2-mark.png" alt="LM2" width="240" height="159" />
+          <img class="symbol on-light" src="/logos/polymtl-symbol.png" alt="Polytechnique Montréal" width="256" height="256" />
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

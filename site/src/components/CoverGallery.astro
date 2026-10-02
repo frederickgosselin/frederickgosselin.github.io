@@ -1,0 +1,102 @@
+---
+// Grid of thumbnails; a click opens the full-size image in a dialog.
+// Without JavaScript each thumbnail is a plain link to the full-size image.
+interface Props {
+  covers: { src: string; thumb: string; alt: string }[];
+  closeLabel?: string;
+  prevLabel?: string;
+  nextLabel?: string;
+}
+const { covers, closeLabel = 'Close', prevLabel = 'Previous', nextLabel = 'Next' } = Astro.props;
+---
+
+<ul class="covers" data-covers>
+  {covers.map((c, i) => (
+    <li>
+      <a href={c.src} data-index={i} data-alt={c.alt}>
+        <img src={c.thumb} alt={c.alt} loading="lazy" decoding="async" />
+      </a>
+    </li>
+  ))}
+</ul>
+
+<dialog class="lightbox" aria-label="Image viewer">
+  <form method="dialog"><button class="lb-close" aria-label={closeLabel}>×</button></form>
+  <button class="lb-nav lb-prev" type="button" aria-label={prevLabel}>‹</button>
+  <figure>
+    <img alt="" />
+    <figcaption></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" type="button" aria-label={nextLabel}>›</button>
+</dialog>
+
+<style>
+  .covers {
+    list-style: none; padding: 0; margin: 0 0 2rem;
+    display: grid; gap: 0.9rem; grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 36rem) { .covers { grid-template-columns: repeat(3, 1fr); } }
+  .covers li { margin: 0; }
+  .covers a { display: block; border: 1px solid var(--rule); border-radius: 3px; background: var(--paper-soft); overflow: hidden; }
+  .covers a:hover { border-color: var(--cyan); box-shadow: 0 2px 10px rgb(0 0 0 / 0.15); }
+  .covers img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: contain; }
+
+  .lightbox {
+    border: 0; padding: 0; background: transparent; max-width: 100vw; max-height: 100vh;
+    width: 100vw; height: 100vh; color: #fff;
+  }
+  .lightbox::backdrop { background: rgb(0 0 0 / 0.88); }
+  .lightbox[open] { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; justify-items: center; }
+  .lightbox form { display: contents; }
+  .lightbox figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; max-width: 100%; max-height: 100vh; padding: 1rem 0; }
+  .lightbox figure img { max-width: calc(100vw - 8rem); max-height: calc(100vh - 5rem); width: auto; height: auto; object-fit: contain; background: #fff; }
+  .lightbox figcaption { font-size: 0.9rem; text-align: center; max-width: 40rem; }
+  .lb-close, .lb-nav {
+    background: rgb(255 255 255 / 0.12); color: #fff; border: 0; cursor: pointer; line-height: 1;
+    width: 2.75rem; height: 2.75rem; border-radius: 999px; font-size: 1.8rem;
+  }
+  .lb-close:hover, .lb-nav:hover { background: rgb(255 255 255 / 0.28); }
+  .lb-close { position: fixed; top: 0.9rem; right: 0.9rem; z-index: 2; }
+  .lb-nav { margin: 0 0.6rem; }
+  @media (max-width: 36rem) {
+    .lightbox figure img { max-width: calc(100vw - 1rem); }
+    .lb-nav { position: fixed; bottom: 0.9rem; margin: 0; }
+    .lb-prev { left: 0.9rem; }
+    .lb-next { right: 0.9rem; }
+  }
+</style>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('[data-covers]');
+  const dlg = document.querySelector<HTMLDialogElement>('dialog.lightbox');
+  if (grid && dlg && typeof dlg.showModal === 'function') {
+    const links = [...grid.querySelectorAll<HTMLAnchorElement>('a')];
+    const img = dlg.querySelector('figure img') as HTMLImageElement;
+    const cap = dlg.querySelector('figcaption') as HTMLElement;
+    let i = 0;
+    const show = (n: number) => {
+      i = (n + links.length) % links.length;
+      img.src = links[i].href;
+      img.alt = links[i].dataset.alt ?? '';
+      cap.textContent = links[i].dataset.alt ?? '';
+    };
+    links.forEach((a, n) =>
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        show(n);
+        dlg.showModal();
+      }),
+    );
+    dlg.querySelector('.lb-prev')!.addEventListener('click', () => show(i - 1));
+    dlg.querySelector('.lb-next')!.addEventListener('click', () => show(i + 1));
+    // click on the dark backdrop (not on the image or controls) closes the viewer
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg || (e.target as HTMLElement).tagName === 'FIGURE') dlg.close();
+    });
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(i - 1);
+      if (e.key === 'ArrowRight') show(i + 1);
+    });
+    dlg.addEventListener('close', () => { img.removeAttribute('src'); });
+  }
+</script>
