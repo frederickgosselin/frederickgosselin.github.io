@@ -1,0 +1,81 @@
+---
+// One news item as a card: thumbnail (first image of the post, or a video marker) + a few lines of text.
+import type { CollectionEntry } from 'astro:content';
+import { fmtDate, T, type Lang } from '../i18n';
+
+interface Props {
+  entry: CollectionEntry<'news'>;
+  lang: Lang;
+  /** approximate number of characters of text to show */
+  chars?: number;
+}
+const { entry, lang, chars = 260 } = Astro.props;
+const t = T[lang];
+const body = entry.body ?? '';
+
+// thumbnail: same relative path as the original image, under /uploads/news-thumbs (see scripts/make-news-thumbs.py)
+const img = body.match(/!\[[^\]]*\]\(\/uploads\/([^)\s]+)/)?.[1];
+// no image in the post: use the poster of its first YouTube video (saved locally by scripts/fetch-youtube-thumbs.py)
+const ytId = body.match(/youtube(?:-nocookie)?\.com\/embed\/([\w-]{6,})/)?.[1];
+const thumb = img && !img.toLowerCase().endsWith('.pdf')
+  ? `/uploads/news-thumbs/${img.replace(/\.[^./]+$/, '')}.jpg`
+  : ytId ? `/uploads/news-thumbs/yt-${ytId}.jpg` : undefined;
+const hasVideo = /<iframe[^>]+(youtube|vimeo)/i.test(body);
+
+// plain-text excerpt: drop embeds, images, markdown syntax; cut at a word boundary
+const plain = body
+  .replace(/<iframe[\s\S]*?<\/iframe>/gi, ' ')
+  .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+  .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/https?:\/\/\S+/g, ' ')
+  .replace(/[*_#>`]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+let excerpt = plain;
+if (plain.length > chars) {
+  excerpt = plain.slice(0, chars).replace(/\s+\S*$/, '').replace(/[,;:.\s]+$/, '') + '…';
+}
+
+const slug = entry.id.split('/').slice(1).join('/');
+const href = `/${lang}/news/${slug}/`;
+---
+
+<article class={`card ${thumb || hasVideo ? 'has-media' : ''}`}>
+  {(thumb || hasVideo) && (
+    <a class="media" href={href} tabindex="-1" aria-hidden="true">
+      {thumb ? (
+        <img src={thumb} alt="" loading="lazy" decoding="async" />
+      ) : (
+        <span class="video" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="40" height="40"><path d="M8 5v14l11-7z" fill="currentColor" /></svg>
+        </span>
+      )}
+      {thumb && hasVideo && <span class="badge">▶ {lang === 'fr' ? 'Vidéo' : 'Video'}</span>}
+    </a>
+  )}
+  <div class="text">
+    <time datetime={entry.data.date.toISOString().slice(0, 10)}>{fmtDate(lang, entry.data.date)}</time>
+    <h3><a href={href}>{entry.data.title}</a></h3>
+    {excerpt && <p>{excerpt}</p>}
+    <a class="more" href={href}>{lang === 'fr' ? 'Lire la suite' : 'Read more'} →</a>
+  </div>
+</article>
+
+<style>
+  .card { display: block; padding: 1.25rem 0; border-top: 1px solid var(--rule); }
+  .card.has-media { display: grid; grid-template-columns: 11rem 1fr; gap: 1.25rem; align-items: start; }
+  @media (max-width: 36rem) { .card.has-media { grid-template-columns: 1fr; gap: 0.75rem; } }
+  .media { position: relative; display: block; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; background: var(--paper-soft); aspect-ratio: 4 / 3; }
+  .media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .media:hover { border-color: var(--cyan); }
+  .video { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--ink-soft);
+    background: linear-gradient(135deg, var(--paper-soft), var(--rule)); }
+  .badge { position: absolute; right: 0.4rem; bottom: 0.4rem; background: rgb(0 0 0 / 0.72); color: #fff; font-size: 0.75rem; padding: 0.05rem 0.5rem; border-radius: 999px; }
+  time { color: var(--ink-soft); font-size: 0.88rem; }
+  h3 { margin: 0.1rem 0 0.4rem; font-size: 1.2rem; }
+  h3 a { color: var(--ink); text-decoration: none; }
+  h3 a:hover { color: var(--link); text-decoration: underline; }
+  p { margin: 0 0 0.4rem; color: var(--ink); max-width: 62ch; font-size: 1rem; }
+  .more { font-size: 0.92rem; }
+</style>

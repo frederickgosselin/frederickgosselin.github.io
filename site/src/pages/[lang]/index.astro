@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import { LANGS, T, fmtDate, type Lang } from '../../i18n';
+import NewsCard from '../../components/NewsCard.astro';
+import { LANGS, LINKS, T, type Lang } from '../../i18n';
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang } }));
@@ -12,7 +13,6 @@ const t = T[lang];
 const latest = (await getCollection('news', (e) => e.id.startsWith(lang + '/')))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 6);
-const fmt = { format: (d: Date) => fmtDate(lang, d) };
 ---
 
 <Base lang={lang} current="home" wide>
@@ -22,22 +22,20 @@ const fmt = { format: (d: Date) => fmtDate(lang, d) };
       <p class="role">{t.role}</p>
       <div class="bar short"><i></i><i></i><i></i><i></i></div>
       <p class="lab">{t.lab}</p>
+      <p class="profiles">
+        <a href={LINKS.lm2} rel="noopener">{t.labSite}</a> ·
+        <a href={LINKS.lm2Linkedin} rel="noopener">{t.labLinkedin}</a> ·
+        <a href={LINKS.linkedin} rel="noopener">{t.myLinkedin}</a>
+      </p>
     </div>
-    <a class="lab-logo" href="https://lm2.polymtl.ca" aria-label="LM2">
-      <img class="on-light" src={`/logos/lm2-${lang}.png`} alt="LM2 – Laboratory for Multiscale Mechanics" width="480" height="318" />
+    <a class="lab-logo" href={LINKS.lm2} rel="noopener" aria-label={t.labSite}>
+      <img class="on-light" src={`/logos/lm2-${lang}.png`} alt={t.lab} width="480" height="318" />
     </a>
   </section>
 
-  <section style="max-width: var(--measure)">
+  <section style="max-width: 52rem">
     <h2>{t.latest}</h2>
-    <ul class="news-list">
-      {latest.map((e) => (
-        <li>
-          <time datetime={e.data.date.toISOString().slice(0, 10)}>{fmt.format(e.data.date)}</time>
-          <a class="title" href={`/${e.id}/`.replace(`/${lang}/`, `/${lang}/news/`)}>{e.data.title}</a>
-        </li>
-      ))}
-    </ul>
-    <p><a href={`/${lang}/news/`}>{t.allNews} →</a></p>
+    {latest.map((e) => <NewsCard entry={e} lang={lang} />)}
+    <p style="margin-top: 1.25rem"><a href={`/${lang}/news/`}>{t.allNews} →</a></p>
   </section>
 </Base>

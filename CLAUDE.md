@@ -1,6 +1,19 @@
 # Website project: fgosselin.com (Astro, bilingual EN/FR)
 
-Static Astro site in `site/`, migrated from WordPress (fgosselin.meca.polymtl.ca). Hosted on GitHub (Pages).
+Static Astro site in `site/`, migrated from WordPress (fgosselin.meca.polymtl.ca).
+
+## Hosting and deployment (live since 2026/10/02)
+
+- Public address: https://www.fgosselin.com (bare `fgosselin.com` redirects to `www`). Fallback: https://frederickgosselin.github.io/
+- Repository: https://github.com/frederickgosselin/frederickgosselin.github.io (public, branch `main`, git root = this folder).
+- Deploy = `git push` to `main`. The workflow `.github/workflows/deploy.yml` builds `site/` and publishes it
+  (GitHub Pages source must stay "GitHub Actions"). Takes about one minute. Never push without the user's go-ahead.
+- Domain registered at GoDaddy; DNS: four GitHub `A` records on `@`, `CNAME www` -> `frederickgosselin.github.io`,
+  and a GitHub domain-verification TXT. The old GoDaddy mail records (MX, mail CNAMEs) are unused and were left in place.
+  Do not change DNS without asking.
+- The user's machine on the Polytechnique VPN resolves the old records for a while after DNS changes; test with
+  `curl --resolve` or a public resolver (8.8.8.8) before concluding that the site is down.
+- `gh` is installed at `C:\Program Files\GitHub CLI\gh.exe` (not on this shell's PATH); it is logged out by default.
 Brand: Polytechnique Montreal palette and logos (see `site/src/styles/global.css`, `logos/`).
 
 ## Publications: keep the master list and both language pages in sync (MANDATORY)

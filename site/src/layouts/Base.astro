@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { PAGES, T, other, pageUrl, type Lang } from '../i18n';
+import { LINKS, PAGES, T, other, pageUrl, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
@@ -52,7 +52,12 @@ const switchTo = altUrl ?? `/${other(lang)}/`;
 
     <footer class="site-footer">
       <div class="inner">
-        <span>© {new Date().getFullYear()} Frédérick P. Gosselin · {t.lab}</span>
+        <span>
+          © {new Date().getFullYear()} Frédérick P. Gosselin · {t.lab}<br />
+          <a href={LINKS.lm2} rel="noopener">{t.labSite}</a> ·
+          <a href={LINKS.lm2Linkedin} rel="noopener">{t.labLinkedin}</a> ·
+          <a href={LINKS.linkedin} rel="noopener">{t.myLinkedin}</a>
+        </span>
         <span class="logos">
           <img class="on-light" src="/logos/lm2-mark.png" alt="LM2" width="240" height="159" />
           <img class="symbol on-light" src="/logos/polymtl-symbol.png" alt="Polytechnique Montréal" width="256" height="256" />

@@ -1,6 +1,13 @@
 export const LANGS = ['en', 'fr'] as const;
 export type Lang = (typeof LANGS)[number];
 
+// External profiles (checked 2026/10/02: lm2poly.com answers 200)
+export const LINKS = {
+  lm2: 'https://lm2poly.com',
+  lm2Linkedin: 'https://www.linkedin.com/company/laboratory-for-multiscale-mechanics-lm2',
+  linkedin: 'https://www.linkedin.com/in/frederickgosselin/',
+} as const;
+
 // Page slugs per language, in menu order. Each row is one page and its translation.
 export const PAGES: { en: string; fr: string }[] = [
   { en: 'about', fr: 'a-propos' },
@@ -20,6 +27,9 @@ export const T = {
     menu: { about: 'About', 'research-opportunities': 'Research opportunities', teaching: 'Teaching', videos: 'Videos', publications: 'Publications' } as Record<string, string>,
     otherLang: 'Français',
     lab: 'Laboratory for Multiscale Mechanics (LM2)',
+    labSite: 'LM2 website',
+    labLinkedin: 'LM2 on LinkedIn',
+    myLinkedin: 'LinkedIn',
     skip: 'Skip to content',
     tags: 'Tags',
   },
@@ -32,6 +42,9 @@ export const T = {
     menu: { 'a-propos': 'À propos', 'opportunites-de-recherche': 'Opportunités de recherche', enseignement: 'Enseignement', videos: 'Vidéos', publications: 'Publications' } as Record<string, string>,
     otherLang: 'English',
     lab: 'Laboratoire de mécanique multiéchelles (LM2)',
+    labSite: 'Site du LM2',
+    labLinkedin: 'Le LM2 sur LinkedIn',
+    myLinkedin: 'LinkedIn',
     skip: 'Aller au contenu',
     tags: 'Mots-clés',
   },
