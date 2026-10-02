@@ -73,8 +73,16 @@ a:hover { color: var(--link-hover); }
 .nav a[aria-current='page'] { border-bottom-color: var(--ink); font-weight: 600; }
 .nav .lang { margin-left: 0.5rem; padding: 0.15rem 0.7rem; border: 1px solid var(--ink-soft); border-radius: 999px; font-size: 0.9rem; }
 .nav .lang:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+/* phones: menu 25 % larger (0.97 rem -> 1.21 rem) with comfortable tap targets */
+@media (max-width: 40rem) {
+  .nav { font-size: 1.21rem; gap: 0.1rem 1.1rem; }
+  .nav a { padding: 0.4rem 0; }
+  .nav .lang { font-size: 1.12rem; padding: 0.2rem 0.85rem; }
+}
 
-main { max-width: var(--measure); margin: 0 auto; padding: 2.25rem 1rem 4rem; }
+main { max-width: var(--measure); margin: 0 auto; padding: 2.25rem 1rem 4rem; overflow-wrap: anywhere; }
+/* WordPress "embed card" players: invisible on the old site (clipped), only add width here; the link text stays */
+.prose iframe.wp-embedded-content { display: none; }
 main.wide { max-width: var(--wide); }
 
 h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
