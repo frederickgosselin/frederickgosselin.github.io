@@ -21,7 +21,7 @@ Un grand merci au comité organisateur :
 
 - Mojtaba Kheiri, Ph.D., P.Eng., pour avoir dirigé l'initiative;
 - Njuki Mureithi, Yahya Modarres-Sadeghi, Ruxandra Botez, David Sumner et Mary Fiorilli, pour avoir rassemblé cette communauté;
-- Larry Lessard, Rosaire Mongrain, Rabi Baliga et Mari Fiorilli, pour leurs témoignages sincères;
+- Larry Lessard, Rosaire Mongrain, Rabi Baliga et Mary Fiorilli, pour leurs témoignages sincères;
 - Kostas Karazis et Darya Mirhosseini, pour leur présentation, qui a montré l'impact de la recherche et de la carrière du professeur Païdoussis;
 - Luc Mongeau et le Département de génie mécanique de l'Université McGill, pour nous avoir accueillis.
 

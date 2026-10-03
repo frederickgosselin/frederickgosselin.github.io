@@ -21,7 +21,7 @@ A heartfelt thank you to the organising committee:
 
 - Mojtaba Kheiri, Ph.D., P.Eng. for leading the initiative;
 - Njuki Mureithi, Yahya Modarres-Sadeghi, Ruxandra Botez, David Sumner and Mary Fiorilli for bringing this community together;
-- Larry Lessard, Rosaire Mongrain, Rabi Baliga, Mari Fiorilli, for their heartfelt testimonies;
+- Larry Lessard, Rosaire Mongrain, Rabi Baliga, Mary Fiorilli, for their heartfelt testimonies;
 - Kostas Karazis and Darya Mirhosseini for demonstrating through their presentation the impact of Prof Païdoussis's research and career;
 - Luc Mongeau and the Department of Mechanical Engineering at McGill University for hosting us.
 

@@ -26,9 +26,10 @@ covers:
 
 **Papers under review**
 
-1.  Duchesne, O., Broggi, C., Chizari, K., Therriault, D., Gosselin, F.P. “Two-Dimensional Cellular Material Optimization for Additive Manufacturing of Sandwich Panels” under review. **[Preprint](https://dx.doi.org/10.2139/ssrn.7169854)**
-2.  Boukor, M., Tallón Marrón, P., Nguyen, R.P.T., Vétel, J., Laurendeau, É., Gosselin, F.P. “Wake-Induced Drag and Phase-Reconstructed Dynamics of a Flexible Plate in Normal Flow” under review. **[Preprint](https://arxiv.org/abs/2604.10840)**
-3.  Duchesne, O., Verville, M., Sojoudi Asli, N., Auger, F., Chizari, K., Farahani, R., Gosselin, F.P., Therriault, D. “Large-Scale Extrusion-Based Additive Manufacturing of High-Temperature Resistant Thermoplastic Composites” Under review
+1.  Moazen, S., Wong, J.C.H., Gosselin, F.P., Tabiai, I., Dubé, M. “Enhancing Mechanical Performance of FFF-printed LDPE/Regolith Composites via Discrete In-situ Consolidation” under review
+2.  Duchesne, O., Broggi, C., Chizari, K., Therriault, D., Gosselin, F.P. “Two-Dimensional Cellular Material Optimization for Additive Manufacturing of Sandwich Panels” under review. **[Preprint](https://dx.doi.org/10.2139/ssrn.7169854)**
+3.  Boukor, M., Tallón Marrón, P., Nguyen, R.P.T., Vétel, J., Laurendeau, É., Gosselin, F.P. “Wake-Induced Drag and Phase-Reconstructed Dynamics of a Flexible Plate in Normal Flow” under review. **[Preprint](https://arxiv.org/abs/2604.10840)**
+4.  Duchesne, O., Verville, M., Sojoudi Asli, N., Auger, F., Chizari, K., Farahani, R., Gosselin, F.P., Therriault, D. “Large-Scale Extrusion-Based Additive Manufacturing of High-Temperature Resistant Thermoplastic Composites” Under review
 
 **Peer Reviewed Papers**
 
