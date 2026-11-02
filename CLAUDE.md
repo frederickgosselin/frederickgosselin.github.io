@@ -13,6 +13,8 @@ Static Astro site in `site/`, migrated from WordPress (fgosselin.meca.polymtl.ca
   Do not change DNS without asking.
 - The user's machine on the Polytechnique VPN resolves the old records for a while after DNS changes; test with
   `curl --resolve` or a public resolver (8.8.8.8) before concluding that the site is down.
+- Visit statistics: GoatCounter (cookie-free, no consent banner), script in `site/src/layouts/Base.astro`, dashboard
+  https://fgosselin.goatcounter.com (the user's own login). No Google Analytics (Law 25 consent); Search Console is optional.
 - `gh` is installed at `C:\Program Files\GitHub CLI\gh.exe` (not on this shell's PATH); it is logged out by default.
 Brand: Polytechnique Montreal palette and logos (see `site/src/styles/global.css`, `logos/`).
 

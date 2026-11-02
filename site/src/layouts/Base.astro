@@ -27,6 +27,8 @@ const switchTo = altUrl ?? `/${other(lang)}/`;
     <meta name="description" content={description ?? t.role} />
     <link rel="icon" type="image/png" href="/logos/polymtl-symbol.png" />
     <link rel="alternate" hreflang={other(lang)} href={switchTo} />
+    <!-- GoatCounter: cookie-free visit counter (dashboard: https://fgosselin.goatcounter.com) -->
+    <script is:inline data-goatcounter="https://fgosselin.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   </head>
   <body>
     <a class="skip" href="#content">{t.skip}</a>
@@ -56,7 +58,8 @@ const switchTo = altUrl ?? `/${other(lang)}/`;
           © {new Date().getFullYear()} Frédérick P. Gosselin · {t.lab}<br />
           <a href={LINKS.lm2} rel="noopener">{t.labSite}</a> ·
           <a href={LINKS.lm2Linkedin} rel="noopener">{t.labLinkedin}</a> ·
-          <a href={LINKS.linkedin} rel="noopener">{t.myLinkedin}</a>
+          <a href={LINKS.linkedin} rel="noopener">{t.myLinkedin}</a><br />
+          {t.analytics} <a href="https://www.goatcounter.com" rel="noopener">GoatCounter</a>.
         </span>
         <span class="logos">
           <img class="on-light" src="/logos/lm2-mark.png" alt="LM2" width="240" height="159" />
