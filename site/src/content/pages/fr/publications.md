@@ -31,7 +31,7 @@ covers:
 
 **Articles publiés dans journaux à comité de lecture**
 
-1.  Duchesne, O., Broggi, C., Chizari, K., Therriault, D., Gosselin, F.P. “Two-Dimensional Cellular Material Optimization for Additive Manufacturing of Sandwich Panels” Accepted for publication in *Materials & Design*. **[Preprint](https://dx.doi.org/10.2139/ssrn.7169854)**
+1.  Duchesne, O., Broggi, C., Chizari, K., Therriault, D., Gosselin, F.P. “[Two-Dimensional Cellular Material Optimization for Additive Manufacturing of Sandwich Panels](https://doi.org/10.1016/j.matdes.2026.117416)” *Materials & Design*, 2026, 117416, **Open Access**. **[Preprint](https://dx.doi.org/10.2139/ssrn.7169854)**
 2.  Duchesne, O., Verville, M., Sojoudi Asli, N., Auger, F., Chizari, K., Farahani, R., Gosselin, F.P., Therriault, D. “Large-Scale Extrusion-Based Additive Manufacturing of High-Temperature Resistant Thermoplastic Composites” Accepted for publication in *Additive Manufacturing*. **[Preprint](https://dx.doi.org/10.2139/ssrn.6819939)**
 3.  Ghorbani, E., Dollon, Q., Gosselin, F.P. “Physics-aware tuning of unscented Kalman filter to Estimate Parameters, Quantify Abrupt Parameter Change, and Quantify Uncertainty in Identification of a Dynamic System with Many DoFs”, Accepted for publication in Discover Mechanical Engineering. **[Preprint](https://doi.org/10.22541/au.175978297.72455436/v1)**
 4.  Abda, M., Berthet, L., Hamedi, M., Piollet, E., Blake, C., Blais, B., Gosselin, F.P. “[The Finite Element Neural Network Method: Leveraging Non-Vanishing Shape Functions in Space–Time–Parameter Framework](https://doi.org/10.1038/s41598-026-46707-3)” Scientific Reports, **16**, Article number: 18102 (2026). **Open Access**
